@@ -19,6 +19,7 @@ public class Elf extends Race {
         this.stats[6] = 7;
         this.stats[7] = 3;
         this.stats[8] = 9;
+        //prueba
     }
     
     public Elf(String name){

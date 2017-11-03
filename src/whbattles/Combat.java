@@ -32,9 +32,9 @@ public class Combat {
 
     private int hitDifficulty() { //metodo que determina el numero de dificultad para impactar 
         int difficulty;
-        if (this.fighter1.getStats()[1] > this.fighter2.getStats()[1]) { //si el atacante tiene mas HA
+        if (this.fighter1.getHA() > this.fighter2.getHA()) { //si el atacante tiene mas HA
             difficulty = 3;
-        } else if (2 * this.fighter1.getStats()[1] + 1 == this.fighter2.getStats()[1]) { //si el defensor dobla +1 la HA del agresor
+        } else if (2 * this.fighter1.getHA() + 1 == this.fighter2.getHA()) { //si el defensor dobla +1 la HA del agresor
             difficulty = 5;
         } else {
             difficulty = 4; //resto de casos, que son que el atacante tenga menos HA pero nunca menos del doble +1
@@ -55,19 +55,19 @@ public class Combat {
     }
 
     private int woundDifficulty() {
-        if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == 0) { // si F-R = 0 entonces la dificultad es a 4+
+        if (this.fighter1.getF() - this.fighter2.getR() == 0) { // si F-R = 0 entonces la dificultad es a 4+
             return 4;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == 1) { // si F-R = 1 entonces dificultad es 3+
+        } else if (this.fighter1.getF() - this.fighter2.getR() == 1) { // si F-R = 1 entonces dificultad es 3+
             return 3;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == 2) {
+        } else if (this.fighter1.getF() - this.fighter2.getR() == 2) {
             return 2;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == -1) {
+        } else if (this.fighter1.getF() - this.fighter2.getR() == -1) {
             return 5;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == -2) {
+        } else if (this.fighter1.getF() - this.fighter2.getR() == -2) {
             return 6;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == -3) {
+        } else if (this.fighter1.getF() - this.fighter2.getR() == -3) {
             return 6;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] <= -4) { //casos que superan diferencia por -3 es imposible, devuelvo un 0
+        } else if (this.fighter1.getF() - this.fighter2.getR() <= -4) { //casos que superan diferencia por -3 es imposible, devuelvo un 0
             return 0;
         } else { //resto de casos, que son los que superan la diferencia por 2+
             return 2;
@@ -88,7 +88,7 @@ public class Combat {
     }
 
     private boolean checkDeath() { //comprobar heridas del fighter 1.si son <= 0 -->  TRUE = muerto
-        if (this.fighter2.getStats()[5] <= 0) {
+        if (this.fighter2.getH() <= 0) {
             System.out.println(this.fighter2.getName() + " ha muerto");
             System.out.println("EL COMBATE HA TERMINADO!!! El ganador es " + this.fighter1.getName());
         }
@@ -96,7 +96,7 @@ public class Combat {
     }
 
     private boolean checkDeathAtacante() { //comprobar heridas fighter 2, si es true, esta muerto
-        if (this.fighter1.getStats()[5] <= 0) {
+        if (fighter1.getH() <= 0) {
             System.out.println(this.fighter1.getName() + " ha muerto");
         }
         return this.fighter1.getStats()[5] <= 0;
@@ -143,14 +143,14 @@ public class Combat {
     }
 
     private void subtractWound() { //se mete en las heridas del array de fighter2 y le quita 1
-        this.fighter2.setStat(5, 1);
+        this.fighter2.subtractStat(5, 1);
         System.out.println("Parece que " + this.fighter2.getName() + " tiene ahora HERIDAS= " + this.fighter2.getStats()[5] + " herida(s)");
     }
 
     public void fight() {
         boolean dead = false;
         while (!dead) {
-            int a = this.fighter1.getStats()[7]; //guardo en la variable a los ataques del f1
+            int a = this.fighter1.getA(); //guardo en la variable a los ataques del f1
             while (a > 0) {
                 boolean h = hit();
                 if (h & (a > 0)) {

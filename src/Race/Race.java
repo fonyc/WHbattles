@@ -60,7 +60,7 @@ public class Race {
         this.stats = stats;
     }
     
-    public void setStat(int i, int j){ //este metodo particular coge i= un elemento de los 9 del array y suma a ese numero una j
+    public void subtractStat(int i, int j){ //este metodo particular coge i= un elemento de los 9 del array y resta a ese numero una j
         this.stats[i] -= j;
     }
 
@@ -68,5 +68,37 @@ public class Race {
         this.name = name;
     }
     
+    public int getM(){
+        return this.stats[0];
+    }
     
+    public int getHA(){
+        return this.stats[1];
+    }
+    public int getHP(){
+        return this.stats[2];
+    }
+    
+    public int getF(){
+        return this.stats[3];
+    }
+    
+    public int getR(){
+        return this.stats[4];
+    }
+    
+    public int getH(){
+        return this.stats[5];
+    }
+    
+    public int getI(){
+        return this.stats[6];
+    }
+    
+    public int getA(){
+        return this.stats[7];
+    }
+    public int getL(){
+        return this.stats[8];
+    }
 }

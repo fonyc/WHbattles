@@ -53,25 +53,28 @@ public class Combat {
         int dice = roll(); //guardo en dice la tirada del dado       
         return dice >= i; //devuelvo true si la tirada es mayor o igual que la dificultad (impacto!!)
     }
-
+    
     private int woundDifficulty() {
-        if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == 0) { // si F-R = 0 entonces la dificultad es a 4+
-            return 4;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == 1) { // si F-R = 1 entonces dificultad es 3+
-            return 3;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == 2) {
-            return 2;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == -1) {
-            return 5;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == -2) {
-            return 6;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] == -3) {
-            return 6;
-        } else if (this.fighter1.getStats()[3] - this.fighter2.getStats()[4] <= -4) { //casos que superan diferencia por -3 es imposible, devuelvo un 0
-            return 0;
-        } else { //resto de casos, que son los que superan la diferencia por 2+
-            return 2;
-        }
+    	switch (this.fighter1.getStats()[3] - this.fighter2.getStats()[4]) {
+    case 0:
+        return 4;
+    case 1:
+        return 3;
+    case 2:
+        return 2;
+    case -1:
+        return 5;
+    case -2:
+        return 6;
+    case -3:
+        return 6;
+    case -4:
+        return 0;
+    default:
+        return 2;
+}
+    	
+    	
     }
 
     private boolean wound() {
